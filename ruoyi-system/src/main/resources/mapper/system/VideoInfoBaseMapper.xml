@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.VideoInfoBaseMapper">
+    
+    <resultMap type="VideoInfoBase" id="VideoInfoBaseResult">
+        <result property="id"    column="id"    />
+        <result property="videoGroupId"    column="video_group_id"    />
+        <result property="videoTitle"    column="video_title"    />
+        <result property="videoInfomation"    column="video_infomation"    />
+        <result property="videoBanner"    column="video_banner"    />
+        <result property="videoSourceId"    column="video_source_id"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="status"    column="status"    />
+        <result property="isTop"    column="is_top"    />
+        <result property="isHot"    column="is_hot"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectVideoInfoBaseVo">
+        select id, video_group_id, video_title, video_infomation, video_banner, video_source_id, type_id, status, is_top, is_hot, create_date, create_by, update_date, update_by, remark from video_info_base
+    </sql>
+
+    <select id="selectVideoInfoBaseList" parameterType="VideoInfoBase" resultMap="VideoInfoBaseResult">
+        <include refid="selectVideoInfoBaseVo"/>
+        <where>  
+            <if test="videoGroupId != null  and videoGroupId != ''"> and video_group_id = #{videoGroupId}</if>
+            <if test="videoTitle != null  and videoTitle != ''"> and video_title = #{videoTitle}</if>
+            <if test="videoInfomation != null  and videoInfomation != ''"> and video_infomation = #{videoInfomation}</if>
+            <if test="videoBanner != null  and videoBanner != ''"> and video_banner = #{videoBanner}</if>
+            <if test="videoSourceId != null  and videoSourceId != ''"> and video_source_id = #{videoSourceId}</if>
+            <if test="typeId != null  and typeId != ''"> and type_id = #{typeId}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="isTop != null "> and is_top = #{isTop}</if>
+            <if test="isHot != null "> and is_hot = #{isHot}</if>
+            <if test="createDate != null "> and create_date = #{createDate}</if>
+            <if test="updateDate != null "> and update_date = #{updateDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectVideoInfoBaseById" parameterType="String" resultMap="VideoInfoBaseResult">
+        <include refid="selectVideoInfoBaseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertVideoInfoBase" parameterType="VideoInfoBase">
+        insert into video_info_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="videoGroupId != null">video_group_id,</if>
+            <if test="videoTitle != null">video_title,</if>
+            <if test="videoInfomation != null">video_infomation,</if>
+            <if test="videoBanner != null">video_banner,</if>
+            <if test="videoSourceId != null">video_source_id,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="status != null">status,</if>
+            <if test="isTop != null">is_top,</if>
+            <if test="isHot != null">is_hot,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateDate != null">update_date,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="videoGroupId != null">#{videoGroupId},</if>
+            <if test="videoTitle != null">#{videoTitle},</if>
+            <if test="videoInfomation != null">#{videoInfomation},</if>
+            <if test="videoBanner != null">#{videoBanner},</if>
+            <if test="videoSourceId != null">#{videoSourceId},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="isTop != null">#{isTop},</if>
+            <if test="isHot != null">#{isHot},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateDate != null">#{updateDate},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVideoInfoBase" parameterType="VideoInfoBase">
+        update video_info_base
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="videoGroupId != null">video_group_id = #{videoGroupId},</if>
+            <if test="videoTitle != null">video_title = #{videoTitle},</if>
+            <if test="videoInfomation != null">video_infomation = #{videoInfomation},</if>
+            <if test="videoBanner != null">video_banner = #{videoBanner},</if>
+            <if test="videoSourceId != null">video_source_id = #{videoSourceId},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="isTop != null">is_top = #{isTop},</if>
+            <if test="isHot != null">is_hot = #{isHot},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateDate != null">update_date = #{updateDate},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVideoInfoBaseById" parameterType="String">
+        delete from video_info_base where id = #{id}
+    </delete>
+
+    <delete id="deleteVideoInfoBaseByIds" parameterType="String">
+        delete from video_info_base where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
